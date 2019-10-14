@@ -5,20 +5,20 @@
 </head>
 
 <body>
-    <h1>Import d'une image sur le site</h1>
+    <h1>Convertisseur / Galerie d'images</h1>
     <form method='post' enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" style="border:1px solid blue;">
         <label>Selectionnez une image à importer</label><br>
         <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
         <input type='file' name='image' id='image'><br>
         <button type='submit'>IMPORTER</button>
     </form>
-    <a href="galerie.php">Accéder à la galerie</a>
     <br>
     <?php
+	
     // répertoire cible des images uploadées
     define('TARGET', '../src/img/');
     // Liste des formats d'image valides
-    $tabExt = array('jpg', 'gif', 'png', 'jpeg', 'bmp', 'tiff');
+    $tabExt = array('jpg', 'gif', 'png', 'jpeg');
 
     // On vérifie que le formulaire posté n'est pas vide
     if (!empty($_POST)) {
@@ -43,7 +43,6 @@
                     // On vérifie que l'import se réalise sans erreur
                     if (move_uploaded_file($_FILES['image']['tmp_name'], $imageLocation)) {
                         echo "Import réussi !<br>";
-                        echo '<img style="width: 500px;" src="', $imageLocation, '">';
                     } else {
                         echo "Echec lors de l'import !<br>";
                     }
@@ -57,7 +56,26 @@
             echo "Pas d'image";
         }
     } else {
-        echo "Erreur, pas de fichier";
+        echo "Pas de fichier à importer.";
     }
+	echo'<br>';
+	
+	$picturesNumber = 0;
+        foreach (glob("../src/img/*.*") as $file) {
+            $picturesNumber++;
+        }
+        echo "Il y a " . $picturesNumber . " images dans la galerie.<br>";
+	
     ?>
+	
+	<br>
+	
+	<tbody>
+        <?php
+        foreach (glob("../src/img/*.*") as $file) {
+			echo '<img src="' . $file . '" style="width: 200px; border: 1px solid blue;">';
+        }
+        ?>
+    </tbody>
+	
 </body>
