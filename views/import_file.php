@@ -71,17 +71,28 @@
             $picturesNumber++;
         }
         echo "Il y a " . $picturesNumber . " images dans la galerie.<br>";
-
+	
+    ?>
+	
+	<br>
+	
+	<tbody>
+        <?php
+        foreach (glob("../src/img/*.*") as $file) {
+			echo '<a href="Accueil.php?nom=' .$file. '">';
+			echo '<img src="' . $file . '" style="width: 16%; border: 1px solid blue;">';
+			echo '</a>';
+        }
         ?>
 
         <br>
 
-        <div class="container">
-            <?php
-            foreach (glob("../src/img/*.*") as $file) {
-                echo '<img src="' . $file . '" style="width: 16%; border: 1px solid blue;">';
-            }
+        <!-- <div class="container">
+            <--?php
+            //foreach (glob("../src/img/*.*") as $file) {
+              //  echo '<img src="' . $file . '" style="width: 16%; border: 1px solid blue;">';
+            //}
             ?>
-        </div>
+        </div> -->
     </div>
 </body>
