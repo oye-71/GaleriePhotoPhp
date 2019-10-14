@@ -73,7 +73,9 @@
 	<tbody>
         <?php
         foreach (glob("../src/img/*.*") as $file) {
+			echo '<a href="Accueil.php?nom=' .$file. '">';
 			echo '<img src="' . $file . '" style="width: 200px; border: 1px solid blue;">';
+			echo '</a>';
         }
         ?>
     </tbody>

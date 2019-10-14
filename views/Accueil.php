@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Galerie / Convertisseur Image</title>
+        <title>Convertisseur d'image</title>
 
 
     </head>
@@ -11,19 +11,19 @@
 		
 		<?php
 		
-		include ('import_file.php');
-		
-		$filename=$file;
+		if(isset($_GET['nom']))
+		{
+			echo '<img src="' . $_GET["nom"] . '" style="width: 200px; border: 1px solid blue;">';
+		}
 		
 		echo '<form method="post" action="Accueil.php">
-<select name="taskOption">
-      <option value="jpg">JPG</option>
-      <option value="jpeg">JPEG</option>
-      <option value="png">PNG</option>
-	  <option value="gif">GIF</option>
-</select>
-<input type="submit" value="Submit the form" />
-</form>';		
+		<select name="taskOption">
+			  <option value="jpg">JPG</option>
+			  <option value="jpeg">JPEG</option>
+			  <option value="png">PNG</option>
+			  <option value="gif">GIF</option>
+		</select>
+		</form>';		
 		
 function resize_img($file,$max_size = 1280,$qualite = 100,$type = 'auto'){
 
