@@ -2,9 +2,14 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <?php
+    require 'navbar.php';
+    ?>
     <h1>Import d'une image sur le site</h1>
     <form method='post' enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" style="border:1px solid blue;">
         <label>Selectionnez une image à importer</label><br>
@@ -18,7 +23,7 @@
     // répertoire cible des images uploadées
     define('TARGET', '../src/img/');
     // Liste des formats d'image valides
-    $tabExt = array('jpg', 'gif', 'png', 'jpeg', 'bmp', 'tiff');
+    $tabExt = array('jpg', 'gif', 'png', 'jpeg');
 
     // On vérifie que le formulaire posté n'est pas vide
     if (!empty($_POST)) {
