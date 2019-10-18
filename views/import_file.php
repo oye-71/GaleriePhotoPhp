@@ -2,6 +2,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -10,13 +12,15 @@
     ?>
     <div class="container">
         <div class="row">
-            <h1 class='center'>Convertisseur / Galerie d'images</h1>
+            <div class="col d-flex justify-content-center">
+                <h1 class='center'>Convertisseur / Galerie d'images</h1>
+            </div>
         </div>
         <form method='post' enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" style="border:1px solid blue;">
             <label>Selectionnez une image à importer</label><br>
             <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
             <input type='file' name='image' id='image'><br>
-            <button type='submit'>IMPORTER</button>
+            <input type='submit' value='Importer' name='btnImport'>
         </form>
         <br>
         <?php
@@ -28,6 +32,7 @@
 
         // On vérifie que le formulaire posté n'est pas vide
         if (!empty($_POST)) {
+            // if ($_POST['btnImport'] == 'Importer') {
             echo "Formulaire posté.<br>";
 
             // On vérifie que l'input censé contenir l'image n'est pas vide
@@ -61,9 +66,14 @@
             } else {
                 echo "Pas d'image";
             }
-        } else {
+        } //else {
+        //echo 'On a pas cliqué sur Importer';
+        //}
+        /*}*/ else {
             echo "Pas de fichier à importer.";
         }
+
+
         echo '<br>';
 
         $picturesNumber = 0;
@@ -71,28 +81,19 @@
             $picturesNumber++;
         }
         echo "Il y a " . $picturesNumber . " images dans la galerie.<br>";
-	
-    ?>
-	
-	<br>
-	
-	<tbody>
-        <?php
-        foreach (glob("../src/img/*.*") as $file) {
-			echo '<a href="Accueil.php?nom=' .$file. '">';
-			echo '<img src="' . $file . '" style="width: 16%; border: 1px solid blue;">';
-			echo '</a>';
-        }
+
+        unset($_POST);
         ?>
 
         <br>
 
-        <!-- <div class="container">
-            <--?php
-            //foreach (glob("../src/img/*.*") as $file) {
-              //  echo '<img src="' . $file . '" style="width: 16%; border: 1px solid blue;">';
-            //}
+        <tbody>
+            <?php
+            foreach (glob("../src/img/*.*") as $file) {
+                echo '<a href="Accueil.php?nom=' . $file . '">';
+                echo '<img src="' . $file . '" style="width: 16%; border: 1px solid blue;">';
+                echo '</a>';
+            }
             ?>
-        </div> -->
     </div>
 </body>

@@ -9,6 +9,9 @@
 </head>
 
 <body>
+    <?php
+    require 'navbar.php';
+    ?>
         <h1>Bienvenue sur le convertisseur d'images</h1>
 		
 		<?php
