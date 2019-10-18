@@ -1,26 +1,26 @@
-<!DOCTYPE html>
-
-<head>
-    <meta charset="UTF-8">
-</head>
-
-<body>
-    <h1>Images enregistrées sur la galerie :</h1>
-    <div class="container">
-        <?php
-        $picturesNumber = 0;
-        foreach (glob("../src/img/*.*") as $file) {
-            $picturesNumber++;
-        }
-        echo "Il y a " . $picturesNumber . " images dans la galerie.<br>";
-        ?>
-        <a href="import_file.php">Importer une image</a>
-        <br>
-        <?php
-        // Affichage des images
-        foreach (glob("../src/img/*.*") as $file) {
-            echo '<img src="' . $file . '" style="width: 200px; border: 1px solid blue;">';
-        }
-        ?>
+<div class="row">
+    <div class="col d-flex justify-content-center">
+        <h3>Images enregistrées sur la galerie :</h3>
     </div>
-</body>
+</div>
+<p>
+    <?php
+    $picturesNumber = 0;
+    foreach (glob("../src/img/*.*") as $file) {
+        $picturesNumber++;
+    }
+    echo "Il y a " . $picturesNumber . " images dans la galerie.<br>";
+
+    unset($_POST);
+    ?>
+</p>
+<div class="container">
+    <br>
+    <?php
+    foreach (glob("../src/img/*.*") as $file) {
+        echo '<a href="Accueil.php?nom=' . $file . '">';
+        echo '<img src="' . $file . '" style="width: 16%; border: 1px solid blue;">';
+        echo '</a>';
+    }
+    ?>
+</div>
