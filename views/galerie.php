@@ -15,12 +15,21 @@
     ?>
 </p>
 <div class="container">
-    <br>
-    <?php
-    foreach (glob("../src/img/*.*") as $file) {
-        echo '<a href="Accueil.php?nom=' . $file . '">';
-        echo '<img src="' . $file . '" style="width: 16%; border: 1px solid blue;">';
-        echo '</a>';
-    }
-    ?>
+    <div class="row">
+        <br>
+        <?php
+        $i = 0;
+        foreach (glob("../src/img/*.*") as $file) {
+            if($i == 4){
+                echo "</div><div class='row'>";
+                $i = 0;
+            }
+            echo "<div class='col-3 p-2'>";
+            echo '<a class="align-middle" href="Accueil.php?nom=' . $file . '">';
+            echo '<img class="align-middle img-thumbnail" src="' . $file . '" style="width: 100%;">';
+            echo '</a></div>';
+            $i++;
+        }
+        ?>
+    </div>
 </div>

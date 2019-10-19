@@ -16,17 +16,22 @@
                 <h1 class='center'>Convertisseur / Galerie d'images</h1>
             </div>
         </div>
-        <form method='get'>
-            <input class="btn btn-dark mt-1" type='submit' value='Importer une image' name='btnActiveForm'>
-        </form>
         <?php
         $pageIsRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
         if (isset($_GET["btnActiveForm"])) {
             if ($_GET["btnActiveForm"] == 'Importer une image') {
                 require 'import_form.php';
+            } else {
+                echo "<form method='get'>";
+                echo "<input class='btn btn-dark mt-1' type='submit' value='Importer une image' name='btnActiveForm'>";
+                echo "</form>";
             }
+        } else {
+            echo "<form method='get'>";
+            echo "<input class='btn btn-dark mt-1' type='submit' value='Importer une image' name='btnActiveForm'>";
+            echo "</form>";
         }
-        if(isset($_POST) && !$pageIsRefreshed){
+        if (isset($_POST) && !$pageIsRefreshed) {
             require 'import_method.php';
         }
         ?>
