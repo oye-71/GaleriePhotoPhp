@@ -31,7 +31,7 @@
             echo "<input class='btn btn-dark mt-1' type='submit' value='Importer une image' name='btnActiveForm'>";
             echo "</form>";
         }
-        if (isset($_POST) && !$pageIsRefreshed) {
+        if (isset($_POST['btnImport']) && !$pageIsRefreshed) {
             require 'import_method.php';
         }
         ?>
