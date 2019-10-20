@@ -11,6 +11,7 @@
 <body>
 	<?php
 	require 'navbar.php';
+	require 'resize_img.php'
 	?>
 	<div class="container-fluid">
 		<div class="row">
@@ -21,18 +22,28 @@
 		<div class='row mr-3'>
 			<div class='col-9 mt-3 justify-content-center'>
 				<?php
-
+				// On teste si la page a été rafraichie
+				$pageIsRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+				// On récupère l'image si elle existe
 				if (isset($_GET['nom'])) {
 					echo '<img src="' . $_GET["nom"] . '" style="max-width: 100%;">';
 					$fileentry = $_GET['nom'];
+					if (isset($_POST["btnConvertir"]) && !$pageIsRefreshed) {
+						$newImg = resize_img($fileentry, $_POST["height"], $_POST["width"], $_POST["taskOption"]);
+						if (strstr(
+							$newImg,
+							"../src/img/"
+						)) {
+							header('Location: Accueil.php?nom=' . $newImg);
+							exit();
+						}
+					}
 				}
 				?>
 			</div>
 			<div class="col-3">
-				<?php
-				require 'resize_img.php'
-				?>
 				<br>
+				<!-- Formulaire de modification de l'image -->
 				<form method="post">
 					<h4>Format de l'image :</h4>
 					<div class='row'>
@@ -43,24 +54,42 @@
 							<option value="gif">GIF</option>
 						</select>
 					</div>
+					<label>
+						<?php
+						$fileExtension = pathinfo($fileentry, PATHINFO_EXTENSION);
+						echo "Format actuel de l'image : " . $fileExtension;
+						?>
+					</label>
 					<br>
 					<h4>Taille de l'image (facultatif) :</h4>
 					<div class='row '>
 						<label class='col-8'>Sélectionnez la hauteur souhaitée : </label>
 						<div class='col'>
-							<input class="form-control" type="number" name="height" max="1280">
+							<input class="form-control" type="number" name="height" max="1920">
 						</div>
 					</div>
 					<br>
 					<div class='row'>
 						<label class='col-8'>Sélectionnez la largeur souhaitée : </label>
 						<div class='col'>
-							<input class="form-control" type="number" name="width" max="1280">
+							<input class="form-control" type="number" name="width" max="1920">
 						</div>
 					</div>
 					<br>
-					<input class="btn btn-dark" type="button" onclick="resize_img_js();" value="Export">
+					<input class="btn btn-dark" type="submit" value="Convertir" name="btnConvertir">
 				</form>
+				<br>
+
+				<!-- Téléchargement de l'image -->
+				<div>
+					<a class="btn btn-dark" href="<?php
+													if (isset($_GET["nom"])) {
+														echo $_GET["nom"];
+													}
+													?>" download="image">
+						Télécharger
+					</a>
+				</div>
 			</div>
 		</div>
 </body>

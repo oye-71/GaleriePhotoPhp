@@ -57,23 +57,23 @@ function resize_img($file, $new_height = '', $new_width = '', $extension_export)
             // On remplace l'image en fonction de l'extension
             switch ($extension_export) {
                 case 'jpg':
-                    $file = substr_replace($file, "jpg", -3);
+                    $file = "../src/img/" . md5(uniqid()) . '.' . "jpg";
                     imagejpeg($dest, $file); // Pour les jpg et jpeg
                     break;
 
                 case 'png':
-                    $file = substr_replace($file, "png", -3);
+                    $file = "../src/img/" . md5(uniqid()) . '.' . "png";
                     imagepng($dest, $file); // Pour les png
                     break;
 
                 case 'gif':
-                    $file = substr_replace($file, "gif", -3);
+                    $file = "../src/img/" . md5(uniqid()) . '.' . "gif";
                     imagegif($dest, $file); // Pour les gif
                     break;
             }
 
-            return 'success';
-
+            // return 'success';
+            return $file;
         else :
             return 'resize_error';
         endif;
@@ -82,4 +82,3 @@ function resize_img($file, $new_height = '', $new_width = '', $extension_export)
         return 'no_img';
     endif;
 }
-?>

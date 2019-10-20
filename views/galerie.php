@@ -26,7 +26,7 @@
             }
             echo "<div class='col-3 p-2'>";
             echo '<a class="align-middle" href="Accueil.php?nom=' . $file . '">';
-            echo '<img class="align-middle img-thumbnail" src="' . $file . '" style="width: 100%;">';
+            echo '<img class="align-middle img-thumbnail" src="' . $file . '" style="width: 100%; max-height: 300px;">';
             echo '</a></div>';
             $i++;
         }
