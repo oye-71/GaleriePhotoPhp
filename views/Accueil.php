@@ -86,7 +86,9 @@
 													if (isset($_GET["nom"])) {
 														echo $_GET["nom"];
 													}
-													?>" download="image">
+													?>" download="<?php
+																	echo substr($fileentry, 11);
+																	?>">
 						Télécharger
 					</a>
 				</div>
