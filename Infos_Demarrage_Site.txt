@@ -1,0 +1,5 @@
+Pour lancer cette application PHP, il faut ouvrir la vue import_file.php.
+Bonne utilisation.
+
+Adrian MAY
+Etienne DUMONTET
